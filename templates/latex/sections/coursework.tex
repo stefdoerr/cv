@@ -1,12 +1,9 @@
 ~< extends "section.tex" >~
 
 ~< block body >~
-~< for course in items >~
-\cvlistitem{
-    << course.name >>,
-    << course.instructor >>
-    \hfill
-    << course.semester>>
-}
+
+~< for el in items >~
+    \textbf{<< el.name >>:} << el.details >>\\
 ~< endfor >~
+
 ~< endblock body >~

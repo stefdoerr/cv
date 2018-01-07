@@ -1,65 +1,76 @@
-\documentclass[11pt,letter,sans]{moderncv}
-\DeclareOldFontCommand{\rm}{\normalfont\rmfamily}{\mathrm}
-\DeclareOldFontCommand{\sf}{\normalfont\sffamily}{\mathsf}
-\DeclareOldFontCommand{\tt}{\normalfont\ttfamily}{\mathtt}
-\DeclareOldFontCommand{\bf}{\normalfont\bfseries}{\mathbf}
-\DeclareOldFontCommand{\it}{\normalfont\itshape}{\mathit}
-\DeclareOldFontCommand{\sl}{\normalfont\slshape}{\@nomath\sl}
-\DeclareOldFontCommand{\sc}{\normalfont\scshape}{\@nomath\sc}
-\DeclareRobustCommand*\cal{\@fontswitch\relax\mathcal}
-\DeclareRobustCommand*\mit{\@fontswitch\relax\mathnormal}
+\documentclass[a4paper,10pt]{article}
 
+%A Few Useful Packages
+\usepackage{marvosym}
+\usepackage{fontspec} 					%for loading fonts
+\usepackage{xunicode,xltxtra,url,parskip} 	%other packages for formatting
+\RequirePackage{color,graphicx}
+\usepackage[usenames,dvipsnames]{xcolor}
+\usepackage[big]{layaureo} 				%better formatting of the A4 page
+% an alternative to Layaureo can be ** \usepackage{fullpage} **
+\usepackage{supertabular} 				%for Grades
+\usepackage{titlesec}					%custom \section
 
-\moderncvstyle{<< style >>}
-\moderncvcolor{<< color >>}
-\definecolor{color2}{rgb}{<<color2>>}
-%\renewcommand{\familydefault}{\sfdefault}
+%Setup hyperref package, and colours for links
+\usepackage{hyperref}
+\definecolor{linkcolour}{rgb}{0,0.2,0.6}
+\hypersetup{colorlinks,breaklinks,urlcolor=linkcolour, linkcolor=linkcolour}
 
-\usepackage[top=1in, bottom=1in, left=1.1in, right=1.1in]{geometry}
-\setlength{\hintscolumnwidth}{3cm}
-%\setlength{\makecvtitlenamewidth}{10cm}
+%FONTS
+\defaultfontfeatures{Mapping=tex-text}
+%\setmainfont[SmallCapsFont = Fontin SmallCaps]{Fontin}
+%%% modified for Karol Kozioł for ShareLaTeX use
+\setmainfont[
+SmallCapsFont = Fontin-SmallCaps.otf,
+BoldFont = Fontin-Bold.otf,
+ItalicFont = Fontin-Italic.otf
+]
+{Fontin.otf}
+%%%
 
-\frenchspacing
+%CV Sections inspired by:
+%http://stefano.italians.nl/archives/26
+\titleformat{\section}{\Large\scshape\raggedright}{}{0em}{}[\titlerule]
+\titlespacing{\section}{0pt}{3pt}{3pt}
+%Tweak a bit the top margin
+%\addtolength{\voffset}{-1.3cm}
 
-\usepackage[backend=biber,style=ieee,defernumbers=true]{biblatex}
+%Italian hyphenation for the word: ''corporations''
+\hyphenation{im-pre-se}
 
-% Make the author's name bold in publications.
-\DeclareNameFormat{author}{%
-  \ifthenelse{\equal{#1}{<< name.last >>}}%
-    {\textbf{\ifblank{#4}{}{#4\space}#1}}%
-    {\ifblank{#4}{}{#4\space}#1}%
-  \ifthenelse{\value{listcount}=1 \AND \value{liststop}=2}%
-    {\space and\space}
-    {\ifthenelse{\value{listcount}<\value{liststop}}%
-      {\addcomma\space}
-      {}
-    }
-}
+%-------------WATERMARK TEST [**not part of a CV**]---------------
+\usepackage[absolute]{textpos}
 
-\usepackage{lastpage}
-\cfoot{\addressfont\textcolor{gray}{Page \thepage\ of \pageref{LastPage}}}
+\setlength{\TPHorizModule}{30mm}
+\setlength{\TPVertModule}{\TPHorizModule}
+\textblockorigin{2mm}{0.65\paperheight}
+\setlength{\parindent}{0pt}
 
-\AtEndPreamble{\hypersetup{pdftitle={CV -- << name.first >> << name.last >>}}}
-\name{<< name.first >>}{<< name.last >>}
-%\title{Resumé title}
-%\address{street and number}{postcode city}{country}
-\phone{<< phone >>}
-\email{<< email >>}
-\homepage{<< url >>}
-\social[linkedin]{<<social.linkedin>>}
-\social[twitter]{<<social.twitter>>}
-\social[github]{<<social.github>>}
-\extrainfo{\small Generated on \today}
-%\photo[64pt][0.4pt]{picture}
-% \quote{Generated on \today}
-
-\AtBeginDocument{\hypersetup{colorlinks}}
-
+%--------------------BEGIN DOCUMENT----------------------
 \begin{document}
-\hypersetup{linkcolor=color0,urlcolor=color1}
-\makecvtitle
 
-\vspace{-7mm}
+%WATERMARK TEST [**not part of a CV**]---------------
+%\font\wm=''Baskerville:color=787878'' at 8pt
+%\font\wmweb=''Baskerville:color=FF1493'' at 8pt
+%{\wm
+%	\begin{textblock}{1}(0,0)
+%		\rotatebox{-90}{\parbox{500mm}{
+%			Typeset by Alessandro Plasmati with \XeTeX\  \today\ for
+%			{\wmweb \href{http://www.aleplasmati.comuv.com}{aleplasmati.comuv.com}}
+%		}
+%	}
+%	\end{textblock}
+%}
+
+\pagestyle{empty} % non-numbered pages
+
+\font\fb=''[cmr10]'' %for use with \LaTeX command
+
+%--------------------TITLE-------------
+\par{\centering
+		{\Huge << about.name.first >> \textsc{<< about.name.last >>}
+	}\bigskip\par}
+
 << body >>
 
 \end{document}

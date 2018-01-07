@@ -2,9 +2,9 @@
 
 ~< block body >~
 
-\begin{tabular}{rl}
+\begin{tabular}{rp{11cm}}
     ~< for el in items >~
-        << el.title >>:& << el.details >>\\
+        \textsc{<< el.year >>} & << el.title >>\\
     ~< endfor >~
 \end{tabular}
 

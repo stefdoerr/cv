@@ -2,10 +2,10 @@
 
 ~< block body >~
 
-\begin{tabular}{rl}
+\begin{itemize}
     ~< for el in items >~
-        << el.title >>:& << el.details >>\\
+        \item \textbf{<< el.name >>:} << el.details >>
     ~< endfor >~
-\end{tabular}
+\end{itemize}
 
 ~< endblock body >~

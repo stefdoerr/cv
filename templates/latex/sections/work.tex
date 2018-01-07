@@ -1,0 +1,12 @@
+~< extends "section.tex" >~
+
+~< block body >~
+
+\begin{tabular}{r|p{11cm}}
+    ~< for el in items >~
+        \textsc{<< el.dates >>} & << el.title >> | \emph{<< el.place >>, << el.location >>}\\
+        ~< if el.details >~&\footnotesize{<< el.details >>}\\~< endif >~\multicolumn{2}{c}{}\\
+    ~< endfor >~
+\end{tabular}
+
+~< endblock body >~

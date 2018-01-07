@@ -1,17 +1,12 @@
 ~< extends "section.tex" >~
 
 ~< block body >~
-~< for school in items >~
-\cvlistitem{
-  ~< if school.degree >~
-    << school.degree >>,
-  ~< endif >~
-  << school.school >>
-  ~< if school.overallGPA >~
-    (<< school.overallGPA >>)
-  ~< endif >~
-  \hfill
-  << school.dates >>
-}
-~< endfor >~
+
+\begin{tabular}{r|p{11cm}}
+    ~< for el in items >~
+        \textsc{<< el.dates >>} & << el.degree >> | \emph{<< el.school >>, << el.location >>}\\
+        ~< if el.thesis >~&\textbf{Thesis:} \footnotesize{<< el.thesis >>}\\~< endif >~\multicolumn{2}{c}{}\\
+    ~< endfor >~
+\end{tabular}
+
 ~< endblock body >~

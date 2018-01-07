@@ -222,38 +222,21 @@ class RenderContext(object):
         for section_tag, section_title in yaml_data['order']:
             print("  + Processing section: {}".format(section_tag))
 
-            section_data = {'name': section_title}
+            section_data = {'section_title': section_title}
             section_content = None if section_tag == "NEWPAGE" else yaml_data[section_tag]
-            if section_tag == 'about':
-                if self._file_ending == '.tex':
-                    continue
-                section_template_name = "section" + self._file_ending
-                section_data['data'] = section_content
-            elif section_tag == 'news':
-                if self._file_ending == '.tex':
-                    continue
-                section_template_name = os.path.join(self.SECTIONS_DIR, 'news.md')
-                section_data['items'] = section_content
-            elif section_tag in ['coursework', 'education', 'honors',
-                                 'industry', 'research',
-                                 'skills', 'teaching']:
-                section_data['items'] = section_content
-                section_template_name = os.path.join(
-                    self.SECTIONS_DIR, section_tag + self._file_ending)
-            elif 'publications' in section_tag:
-                if self._file_ending == ".tex":
-                    section_data['content'] = section_content
-                elif self._file_ending == ".md":
-                    section_data['content'] = get_pub_md(self, section_content)
+
+            if 'publications' in section_tag:
+                section_data['content'] = section_content
                 section_data['scholar_id'] = yaml_data['social']['google_scholar']
-                section_template_name = os.path.join(
-                    self.SECTIONS_DIR, section_tag + self._file_ending)
+                section_template_name = os.path.join(self.SECTIONS_DIR, section_tag + self._file_ending)
             elif section_tag == 'NEWPAGE':
                 pass
             else:
-                print("Error: Unrecognized section tag: {}".format(section_tag))
-                # sys.exit(-1) TODO
-                continue
+                if isinstance(yaml_data[section_tag], list):
+                    section_data['items'] = yaml_data[section_tag]
+                else:
+                    section_data.update(yaml_data[section_tag])
+                section_template_name = os.path.join(self.SECTIONS_DIR, section_tag + self._file_ending)
 
             if section_tag == 'NEWPAGE':
                 if self._file_ending == ".tex":
@@ -261,14 +244,68 @@ class RenderContext(object):
                 elif self._file_ending == ".md":
                     pass
             else:
-                rendered_section = self._render_template(
-                    section_template_name, section_data)
+                rendered_section = self._render_template(section_template_name, section_data)
                 body += rendered_section.rstrip() + '\n\n\n'
 
         yaml_data['body'] = body
         yaml_data['today'] = date.today().strftime("%B %d, %Y")
-        return self._render_template(
-            self._base_template, yaml_data).rstrip() + '\n'
+        return self._render_template(self._base_template, yaml_data).rstrip() + '\n'
+
+    # def render_resume(self, yaml_data):
+    #     # Make the replacements first on the yaml_data
+    #     yaml_data = self.make_replacements(yaml_data)
+    #
+    #     body = ''
+    #     for section_tag, section_title in yaml_data['order']:
+    #         print("  + Processing section: {}".format(section_tag))
+    #
+    #         section_data = {'name': section_title}
+    #         section_content = None if section_tag == "NEWPAGE" else yaml_data[section_tag]
+    #         if section_tag == 'about':
+    #             if self._file_ending == '.tex':
+    #                 continue
+    #             section_template_name = "section" + self._file_ending
+    #             section_data['data'] = section_content
+    #         elif section_tag == 'news':
+    #             if self._file_ending == '.tex':
+    #                 continue
+    #             section_template_name = os.path.join(self.SECTIONS_DIR, 'news.md')
+    #             section_data['items'] = section_content
+    #         elif section_tag in ['coursework', 'education', 'honors',
+    #                              'industry', 'research',
+    #                              'skills', 'teaching']:
+    #             section_data['items'] = section_content
+    #             section_template_name = os.path.join(
+    #                 self.SECTIONS_DIR, section_tag + self._file_ending)
+    #         elif 'publications' in section_tag:
+    #             if self._file_ending == ".tex":
+    #                 section_data['content'] = section_content
+    #             elif self._file_ending == ".md":
+    #                 section_data['content'] = get_pub_md(self, section_content)
+    #             section_data['scholar_id'] = yaml_data['social']['google_scholar']
+    #             section_template_name = os.path.join(
+    #                 self.SECTIONS_DIR, section_tag + self._file_ending)
+    #         elif section_tag == 'NEWPAGE':
+    #             pass
+    #         else:
+    #             print("Error: Unrecognized section tag: {}".format(section_tag))
+    #             # sys.exit(-1) TODO
+    #             continue
+    #
+    #         if section_tag == 'NEWPAGE':
+    #             if self._file_ending == ".tex":
+    #                 body += "\n\n\\newpage\n"
+    #             elif self._file_ending == ".md":
+    #                 pass
+    #         else:
+    #             rendered_section = self._render_template(
+    #                 section_template_name, section_data)
+    #             body += rendered_section.rstrip() + '\n\n\n'
+    #
+    #     yaml_data['body'] = body
+    #     yaml_data['today'] = date.today().strftime("%B %d, %Y")
+    #     return self._render_template(
+    #         self._base_template, yaml_data).rstrip() + '\n'
 
     def write_to_outfile(self, output_data):
         with open(self._output_file, 'wb') as out:
