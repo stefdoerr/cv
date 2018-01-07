@@ -1,0 +1,20 @@
+~< extends "section.tex" >~
+
+~< block body >~
+\vspace{-6mm}
+\hfill
+Google Scholar ID:
+\href{https://scholar.google.com/citations?user=<< scholar_id >>}{<< scholar_id >>}
+\vspace{2mm}
+
+\renewcommand*{\bibfont}{\small}
+
+\DeclareFieldFormat{labelnumberwidth}{}
+\setlength{\biblabelsep}{0pt}
+
+\begin{refsection}[publications/<<content.file>>]
+\nocite{*}
+\printbibliography[heading=none]
+\end{refsection}
+
+~< endblock body >~

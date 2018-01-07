@@ -102,7 +102,7 @@ work:
 
 selected_publications:
   name: "S. Doerr"
-  file: all_publications.bib
+  file: selected.bib
 
 languages:
   - name: Greek

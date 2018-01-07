@@ -229,6 +229,7 @@ class RenderContext(object):
                 section_data['content'] = section_content
                 section_data['scholar_id'] = yaml_data['social']['google_scholar']
                 section_template_name = os.path.join(self.SECTIONS_DIR, section_tag + self._file_ending)
+                print(section_data['content'], section_template_name)
             elif section_tag == 'NEWPAGE':
                 pass
             else:
