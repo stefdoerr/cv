@@ -9,13 +9,13 @@ color2: '0.25,0.25,0.25' # Make the font under the name a darker grey.
 # (tag, section type, title)
 order:
   - [about, Personal Data]
+  - [interests, Current Interests]
   - [work, Work Experience]
   - [education, Education]
   - [awards, Scholarships and Awards]
   - [languages, Languages]
-  - [skills, Computer Skills]
-  - [interests, Current Interests]
-  - [selected_publications, Selected Publications]
+  - [skills, Programming Skills]
+  - [selected_publications, Publications]
   - [coursework, Coursework Projects]
 
 about:
@@ -62,19 +62,19 @@ work:
     title: Post-doctoral Researcher in Computational Biology
     # advisor: Prof. Gianni De Fabritiis
     dates: Sept 2016 -- Present
-    area: Machine learning and molecular simulations
+    details: 'Applications of machine learning on molecular simulations'
 
   - place: Acellera Ltd.
     location: Barcelona, Spain
     title: Scientific Software Developer
     dates: Sept. 2016 -- Present
-    area: Molecular simulation and drug discovery
+    details: 'Core developer of the HTMD platform (\href{http://www.htmd.org/}{htmd.org}) and computational solutions for drug discovery.'
 
   - place: Acellera Ltd.
     location: Barcelona, Spain
     title: HTMD Workshop organizer
     dates: 2013 -- 2016
-    details: 'Co-organizer of the 1st, 2nd and 3rd HTMD workshop on high-throughput molecular dynamics (\href{http://workshop.htmd.org/}{workshop.htmd.org})'
+    details: 'Co-organizer of the 1st, 2nd and 3rd HTMD workshop on high-throughput molecular dynamics.'
 
   - place: Pompeu Fabra University
     location: Barcelona, Spain
@@ -132,7 +132,7 @@ awards:
 
 interests:
   - name: Machine learning / Data mining
-    details: Deep neural networks, dimensionality reduction, Markov models, clustering methods.
+    details: Deep neural networks, dimensionality reduction, Markov models.
   - name: Computational Biology
     details: Molecular dynamics, protein-ligand binding, protein folding, adaptive sampling methods, structure prediction, affinity prediction.
   - name: Software development
@@ -144,7 +144,7 @@ coursework:
   - name: Game Development
     details: '"Arkanoid" in C++, "Monopoly" and "Backgammon" with AI in Java, "Multi-touch table racing game" in C\#'
   - name: Robotics
-    details: 'Motion planning with RRTs, Simultaneous localization and mapping'
+    details: 'Motion planning with inverse Kinetics, Simultaneous localization and mapping'
   - name: Mobile
     details: 'Android application for social event planning.'
   - name: Various

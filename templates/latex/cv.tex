@@ -49,6 +49,34 @@ ItalicFont = Fontin-Italic.otf
 \textblockorigin{2mm}{0.65\paperheight}
 \setlength{\parindent}{0pt}
 
+
+% ------------------- STEFAN: THIS BOLDS MY NAME IN PUBLICATIONS ----------
+\usepackage{xpatch}% or use https://tex.stackexchange.com/a/40705
+
+
+\newbibmacro*{name:bold}[2]{%
+  \def\do##1{\iffieldequalstr{hash}{##1}{\bfseries\listbreak}{}}%
+  \dolistloop{\boldnames}%
+}
+
+\newcommand*{\boldnames}{}
+
+\xpretobibmacro{name:family}{\begingroup\usebibmacro{name:bold}{#1}{#2}}{}{}
+\xpretobibmacro{name:given-family}{\begingroup\usebibmacro{name:bold}{#1}{#2}}{}{}
+\xpretobibmacro{name:family-given}{\begingroup\usebibmacro{name:bold}{#1}{#2}}{}{}
+\xpretobibmacro{name:delim}{\begingroup\normalfont}{}{}
+
+\xapptobibmacro{name:family}{\endgroup}{}{}
+\xapptobibmacro{name:given-family}{\endgroup}{}{}
+\xapptobibmacro{name:family-given}{\endgroup}{}{}
+\xapptobibmacro{name:delim}{\endgroup}{}{}
+
+\renewcommand*{\boldnames}{}
+\forcsvlist{\listadd\boldnames}
+  {{aa4fc4ab499c57e269a31dd4720ffabe}}
+% --------------- You can find your hash in the .bib file -----------------
+
+
 %--------------------BEGIN DOCUMENT----------------------
 \begin{document}
 
